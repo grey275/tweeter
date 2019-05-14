@@ -23,3 +23,6 @@ main section.new-tweet form .counter {
   float: right;
   font-style: italic;
 }
+main section.new-tweet form .counter.invalid {
+  color: red
+}

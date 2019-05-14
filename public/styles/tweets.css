@@ -1,0 +1,14 @@
+main section.tweet-container {
+  margin-left: 2em;
+  margin-right: 2em;
+  padding: 1em;
+  margin: auto;
+  border-radius: 5px;
+  border: 1px solid rgb(194, 191, 191);
+}
+
+main section.tweet-container header {
+  /* background-color: #eee; */
+  background-color: black;
+  border: 1px solid rgb(194, 191, 191);
+}
