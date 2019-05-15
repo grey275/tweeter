@@ -1,4 +1,5 @@
 main section.new-tweet {
+  display: none;
   padding: 1em;
   background-color: #eee;
 }
@@ -20,8 +21,4 @@ main section.new-tweet form .counter {
 }
 main section.new-tweet form .counter.invalid {
   color: red
-}
-
-main section.new-tweet.active {
-  display: none;
 }

@@ -61,18 +61,15 @@ $(function() {
     loadTweets(false);
   }
 
-  function toggleActiveClass(elements) {
-    elements.forEach(element => {
-      if (element.hasClass('active')) {
-        element.removeClass('active')
-      } else {
-        element.addClass('active')
-      }
-    });
-  }
-
   function handleComposeClick(event) {
-    toggleActiveClass([$(this), $('.new-tweet')]);
+    const button = $('.nav-bar__button');
+    if (button.hasClass('active')) {
+      button.removeClass('active')
+    } else {
+      button.addClass('active')
+    }
+    const newTweet = $('.new-tweet');
+    newTweet.slideToggle({ duration: 100, })
   }
 
   function populatePage (data, initialize) {
