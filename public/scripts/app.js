@@ -42,22 +42,33 @@ $(function() {
     return addTweets;
   }
 
+  function validationError(msg) {
+    $('.new-tweet').append($('<label>')
+      .addClass('.new-tweet__error')
+      .text(msg)
+    );
+  }
+
   function handleSubmit(event) {
     event.preventDefault();
     const textarea = $('.new-tweet__input ');
-    console.log('text: ', textarea);
     if (!textarea.val()) {
-      alert('please tweet something!');
+      validationError('please tweet something!');
       return;
     }
     if (textarea.val().length > config.MAX_CHARS) {
-      alert('tweet too long! less is more!');
+      validationError('tweet too long! less is more!');
       return;
     }
-    $.post('/tweets', $(this).serialize());
+    $.post({
+      url: '/tweets',
+      data: $(this).serialize(),
+      success: function(data) { loadTweets() },
+    });
     textarea.val('');
     loadTweets();
   }
+
 
   function handleComposeClick(event) {
     const button = $('.nav-bar__button');
@@ -72,9 +83,10 @@ $(function() {
   }
 
   function populatePage (data) {
-    tweetData = data;
+    const reversed = data.reverse()
     const tweetContainer = $('.tweet-container');
-    addTweetsFactory(tweetContainer)(tweetData);
+    tweetContainer.empty();
+    addTweetsFactory(tweetContainer)(reversed);
   }
 
   function attachHandlers() {
@@ -85,7 +97,7 @@ $(function() {
   function loadTweets(){
     $.get({
       url: '/tweets',
-      success: data => populatePage(data),
+      success: data => { populatePage(data); },
       error: (err) => alert(`tweets not loading!, ${err}`),
       });
   }
