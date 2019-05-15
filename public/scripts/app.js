@@ -43,10 +43,9 @@ $(function() {
   }
 
   function validationError(msg) {
-    $('.new-tweet').append($('<label>')
-      .addClass('.new-tweet__error')
+    $('.new-tweet__error')
       .text(msg)
-    );
+      .addClass('active')
   }
 
   function handleSubmit(event) {
@@ -60,6 +59,7 @@ $(function() {
       validationError('tweet too long! less is more!');
       return;
     }
+    $('.new-tweet__error').removeClass('active');
     $.post({
       url: '/tweets',
       data: $(this).serialize(),
