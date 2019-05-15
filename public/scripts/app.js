@@ -70,6 +70,7 @@ $(function() {
     }
     const newTweet = $('.new-tweet');
     newTweet.slideToggle({ duration: 100, })
+    $('.new-tweet__input').focus();
   }
 
   function populatePage (data, initialize) {
