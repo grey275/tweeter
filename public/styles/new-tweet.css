@@ -21,3 +21,7 @@ main section.new-tweet form .counter {
 main section.new-tweet form .counter.invalid {
   color: red
 }
+
+main section.new-tweet.active {
+  display: none;
+}

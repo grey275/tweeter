@@ -61,12 +61,27 @@ $(function() {
     loadTweets(false);
   }
 
+  function toggleActiveClass(elements) {
+    elements.forEach(element => {
+      if (element.hasClass('active')) {
+        element.removeClass('active')
+      } else {
+        element.addClass('active')
+      }
+    });
+  }
+
+  function handleComposeClick(event) {
+    toggleActiveClass([$(this), $('.new-tweet')]);
+  }
+
   function populatePage (data, initialize) {
     tweetData = data;
     const tweetContainer = $('.tweet-container');
     addTweetsFactory(tweetContainer)(tweetData);
     if (initialize) {
       $('#new-tweet__form').on('submit', handleSubmit);
+      $('.nav-bar__button').on('click', handleComposeClick)
     }
   }
 

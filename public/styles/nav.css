@@ -10,15 +10,32 @@
   z-index: 2;
 }
 
-#nav-bar .logo {
+.nav-bar__logo {
   width:80px;
   height:80px;
   float: left;
 }
 
-#nav-bar .header {
+.nav-bar__header {
   line-height: 2.5em;
   float: left;
   font-size: 2rem;
   display: float;
+}
+
+.nav-bar__actions {
+  float: right;
+  margin: auto;
+}
+
+.nav-bar__button {
+  color: black;
+  margin-top: 14px;
+  height: 3em;
+  border: 1px solid black;
+  background-color: white;
+}
+
+.nav-bar__button.active {
+  color: #00a087;
 }
