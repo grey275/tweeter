@@ -52,23 +52,32 @@ $(function() {
       alert('please tweet something!');
       return;
     }
+    if (textarea.val().length > config.MAX_CHARS) {
+      alert('tweet too long! less is more!');
+      return;
+    }
     $.post('/tweets', $(this).serialize());
     textarea.val('');
+    loadTweets(false);
   }
 
-  function initializePage (data) {
+  function populatePage (data, initialize) {
     tweetData = data;
     const tweetContainer = $('.tweet-container');
     addTweetsFactory(tweetContainer)(tweetData);
-    $('#new-tweet__form').on('submit', handleSubmit);
+    if (initialize) {
+      $('#new-tweet__form').on('submit', handleSubmit);
+    }
   }
 
-  (function loadTweets(){
+  function loadTweets(initialize){
     $.get({
       url: '/tweets',
-      success: data => initializePage(data),
+      success: data => populatePage(data, initialize),
       error: (err) => alert(`tweets not loading!, ${err}`),
       });
-  })()
+  }
+
+  loadTweets(true);
 
 });
