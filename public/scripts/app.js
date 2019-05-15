@@ -46,7 +46,14 @@ $(function() {
 
   function handleSubmit(event) {
     event.preventDefault();
+    const textarea = $('.new-tweet__input ');
+    console.log('text: ', textarea);
+    if (!textarea.val()) {
+      alert('please tweet something!');
+      return;
+    }
     $.post('/tweets', $(this).serialize());
+    textarea.val('');
   }
 
   function initializePage (data) {
