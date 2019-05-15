@@ -1,55 +1,47 @@
 // initial-tweets.json for tweetInfo examples
+$(function() {
 
-function populateTweet(tweet, tweetInfo){
-  const { user, content } = tweetInfo
+  function populateTweet(tweet, tweetInfo){
+    const { user, content } = tweetInfo
 
-  // adding to header
-  const header = tweet.find('header');
-  header.find('.avatar').attr('src', user.avatars.small);
-  header.find('.name').text(user.name);
-  header.find('.handle').text(user.handle);
+    // adding to header
+    const header = tweet.find('header');
+    header.find('.avatar').attr('src', user.avatars.small);
+    header.find('.name').text(user.name);
+    header.find('.handle').text(user.handle);
 
-  // adding to footer
-  const footer = tweet.find('footer');
-  footer.find('.text').text(content.text);
-  footer.find('.created-at')
-    .text(moment(content.created_at).fromNow()
-  );
-}
-
-
-function addTweet(parent, tweetInfo) {
-  const tweet = $('<article>').addClass('tweet');
-  tweet.load('scripts/tweets/tweet.html', (template) => {
-    populateTweet(tweet, tweetInfo);
-    tweet.appendTo(parent);
-  });
-}
-
-function addTweets(data, status) {
-  if (status !== 'success') {
-    console.log('failed to get tweets');
-    return;
+    // adding to footer
+    const footer = tweet.find('footer');
+    footer.find('.text').text(content.text);
+    footer.find('.created-at')
+      .text(moment(content.created_at).fromNow()
+    );
   }
-  for (let tweetInfo of data) {
-    addTweet()
-  }
-}
 
-function tweetAdderFactory(elm) {
-  return (tweetsInfo, status) => {
-    if (status !== 'success') {
-      console.log('failed to get tweets');
-      return;
-    }
-    for (let tweetInfo of tweetsInfo) {
-      addTweet(elm, tweetInfo)
+
+  function addTweet(parent, tweetInfo) {
+    const tweet = $('<article>').addClass('tweet');
+    tweet.load('content/tweet-template.html', (template) => {
+      populateTweet(tweet, tweetInfo);
+      tweet.appendTo(parent);
+    });
+  }
+
+  function tweetAdderFactory(elm) {
+    return (tweetsInfo, status) => {
+      if (status !== 'success') {
+        alert('failed to get tweets');
+        return;
+      }
+      for (let tweetInfo of tweetsInfo) {
+        addTweet(elm, tweetInfo)
+      }
     }
   }
-}
 
-$.get({
-  url: '/tweets',
-  success: tweetAdderFactory($('.container .tweet-container')),
-
-})
+  $.get({
+    url: '/tweets',
+    success: tweetAdderFactory($('.container .tweet-container')),
+    error: (err) => alert('tweets not loading!'),
+    });
+});
