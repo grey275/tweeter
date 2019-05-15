@@ -4,6 +4,9 @@
  * Reminder: Use (and do all your DOM work in) jQuery's document ready function
  */
 
+ // global data container to be populated later
+ let tweetData;
+
 $(function() {
 
   function populateTweet(tweet, tweetInfo){
@@ -32,23 +35,31 @@ $(function() {
     });
   }
 
-  function tweetAdderFactory(elm) {
-    return (tweetsInfo, status) => {
-      if (status !== 'success') {
-        alert('failed to get tweets');
-        return;
-      }
+  function addTweetsFactory(elm) {
+    const addTweets = (tweetsInfo) => {
       for (let tweetInfo of tweetsInfo) {
         addTweet(elm, tweetInfo)
       }
     }
+    return addTweets;
   }
 
+  function handleSubmit(event) {
+    event.preventDefault();
+    $.post('/tweets', $(this).serialize());
+  }
 
+  function initializePage (data) {
+    tweetData = data;
+    const tweetContainer = $('.tweet-container');
+    addTweetsFactory(tweetContainer)(tweetData);
+    $('#new-tweet__form').on('submit', handleSubmit);
+  }
 
   $.get({
     url: '/tweets',
-    success: tweetAdderFactory($('.container .tweet-container')),
-    error: (err) => alert('tweets not loading!'),
+    success: data => initializePage(data),
+    error: (err) => alert(`tweets not loading!, ${err}`),
     });
+
 });
