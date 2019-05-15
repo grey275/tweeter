@@ -56,10 +56,12 @@ $(function() {
     $('#new-tweet__form').on('submit', handleSubmit);
   }
 
-  $.get({
-    url: '/tweets',
-    success: data => initializePage(data),
-    error: (err) => alert(`tweets not loading!, ${err}`),
-    });
+  (function loadTweets(){
+    $.get({
+      url: '/tweets',
+      success: data => initializePage(data),
+      error: (err) => alert(`tweets not loading!, ${err}`),
+      });
+  })()
 
 });
