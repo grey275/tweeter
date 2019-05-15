@@ -1,11 +1,6 @@
 main section.new-tweet {
-  margin-left: 2em;
-  margin-right: 2em;
   padding: 1em;
   background-color: #eee;
-  margin: auto;
-  border-radius: 5px;
-  border: 1px solid rgb(194, 191, 191);
 }
 
 main section.new-tweet h2 {

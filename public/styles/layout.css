@@ -25,12 +25,19 @@ body {
  * Additional CSS can be defined below or in other CSS files, as per instructions
  */
 
- main {
-   padding: 2em;
-   position: relative;
-   width: 450px;
-   height: 100%;
-   margin: auto;
-   top: 140px;
-   background-color: white;
- }
+main {
+  padding: 2em;
+  position: relative;
+  width: 450px;
+  height: 100%;
+  margin: auto;
+  top: 140px;
+  background-color: white;
+}
+
+main > .card {
+  border-radius: 5px;
+  width: 100%;
+  border: 1px solid rgb(194, 191, 191);
+  padding: 1em;
+}

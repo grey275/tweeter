@@ -10,7 +10,11 @@ function populateTweet(tweet, tweetInfo){
   header.find('.handle').text(user.handle);
 
   // adding to footer
-  tweet.find('footer .text').text(content.text)
+  const footer = tweet.find('footer');
+  footer.find('.text').text(content.text);
+  footer.find('.created-at')
+    .text(moment(content.created_at).fromNow()
+  );
 }
 
 

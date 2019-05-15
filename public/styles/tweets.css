@@ -1,14 +1,59 @@
 main section.tweet-container {
-  margin-left: 2em;
-  margin-right: 2em;
-  padding: 1em;
-  margin: auto;
-  border-radius: 5px;
-  border: 1px solid rgb(194, 191, 191);
+  margin-top: 1em;
 }
 
-main section.tweet-container header {
+main section.tweet-container .tweet header {
   /* background-color: #eee; */
-  background-color: black;
-  border: 1px solid rgb(194, 191, 191);
+  padding: .5em;
+  padding-top: 2;
+  background-color: #eee;
+}
+
+main section.tweet-container .tweet header > span {
+  margin: .25em;
+}
+
+
+main section.tweet-container .tweet {
+  margin-top: .5em;
+  border-radius: 5px;
+  border: 1px solid rgb(206, 202, 202);
+  opacity: 0.5;
+}
+
+main section.tweet-container .tweet .name {
+  line-height: 20px;
+  vertical-align: top;
+  font-weight: bold;
+  font-size: 1.5em;
+}
+
+main section.tweet-container .tweet .handle {
+  float: right;
+  vertical-align: bottom;
+  line-height: 20px;
+  font-size: small;
+  color: rgb(149, 147, 147);
+}
+
+main section.tweet-container .tweet .text {
+  padding-top: 15px;
+  margin: .25em;
+  height: 4em;
+  opacity: 5.0;
+}
+
+main section.tweet-container .tweet .avatar {
+  border-radius: 5px;
+}
+
+main section.tweet-container .tweet .created-at {
+  border-top: 1px solid rgb(206, 202, 202);
+  width: 100%;
+  font-size: 10px;
+  padding: .5em;
+}
+
+main section.tweet-container .tweet:hover {
+  opacity: 1;
 }
