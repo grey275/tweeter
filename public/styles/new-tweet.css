@@ -1,24 +1,25 @@
-main section.new-tweet {
+#new-tweet {
   display: none;
   padding: 1em;
   background-color: #eee;
 }
 
-main section.new-tweet h2 {
+.new-tweet__header {
   width: 100%;
   border-bottom: 2px solid;
   margin-top: 0%;
   font-weight: bold;
 }
 
-main section.new-tweet form textarea {
+.new-tweet__input {
   width: 100%;
   padding: .25em;
 }
-main section.new-tweet form .counter {
+.new-tweet__counter{
   float: right;
   font-style: italic;
 }
 main section.new-tweet form .counter.invalid {
   color: red
 }
+

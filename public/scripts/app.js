@@ -13,15 +13,13 @@ $(function() {
     const { user, content } = tweetInfo
 
     // adding to header
-    const header = tweet.find('header');
-    header.find('.avatar').attr('src', user.avatars.small);
-    header.find('.name').text(user.name);
-    header.find('.handle').text(user.handle);
+    tweet.find('.tweet__avatar').attr('src', user.avatars.small);
+    tweet.find('.tweet__name').text(user.name);
+    tweet.find('.handle').text(user.handle);
 
     // adding to footer
-    const footer = tweet.find('footer');
-    footer.find('.text').text(content.text);
-    footer.find('.created-at')
+    tweet.find('.tweet__text').text(content.text);
+    tweet.find('.tweet__created-at')
       .text(moment(content.created_at).fromNow()
     );
   }
@@ -58,7 +56,7 @@ $(function() {
     }
     $.post('/tweets', $(this).serialize());
     textarea.val('');
-    loadTweets(false);
+    loadTweets();
   }
 
   function handleComposeClick(event) {
@@ -73,24 +71,27 @@ $(function() {
     $('.new-tweet__input').focus();
   }
 
-  function populatePage (data, initialize) {
+  function populatePage (data) {
     tweetData = data;
     const tweetContainer = $('.tweet-container');
     addTweetsFactory(tweetContainer)(tweetData);
-    if (initialize) {
-      $('#new-tweet__form').on('submit', handleSubmit);
-      $('.nav-bar__button').on('click', handleComposeClick)
-    }
   }
 
-  function loadTweets(initialize){
+  function attachHandlers() {
+    $('#new-tweet__form').on('submit', handleSubmit);
+    $('.nav-bar__button').on('click', handleComposeClick)
+  }
+
+  function loadTweets(){
     $.get({
       url: '/tweets',
-      success: data => populatePage(data, initialize),
+      success: data => populatePage(data),
       error: (err) => alert(`tweets not loading!, ${err}`),
       });
   }
 
-  loadTweets(true);
+  attachHandlers();
+
+  loadTweets();
 
 });
