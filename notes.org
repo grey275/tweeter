@@ -1,0 +1,7 @@
+* todo
+** DONE add trim() method when validating emptystring
+   CLOSED: [2019-05-15 Wed 16:46]
+** DONE rework attaching handlers and stuff
+   CLOSED: [2019-05-15 Wed 16:46]
+** TODO use sticky instead of position fixed and relative positioning
+** TODO add shake effect if error already present
