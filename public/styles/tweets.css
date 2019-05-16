@@ -1,16 +1,25 @@
-main section.tweet-container {
-  margin-top: 1em;
-}
 :root {
   --normal-alpha: .50;
   --hover-alpha: 1.00;
 }
+
+.tweet-container {
+  margin-top: 1em;
+}
+
 .tweet {
+  /* display: block; */
   margin-top: .5em;
   border-radius: 5px;
   border: 1px solid rgb(206, 202, 202, .80);
   /* opacity: 0.5; */
 }
+
+.tweet.hidden {
+  display: none;
+}
+
+
 
 .tweet header {
   /* background-color: #eee; */

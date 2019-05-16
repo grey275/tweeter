@@ -43,30 +43,31 @@ $(function() {
   }
 
   function validationError(msg) {
-    $('.new-tweet__error')
+    const errorElement = $('.new-tweet__error');
+    errorElement
       .text(msg)
-      .addClass('active')
+      .slideDown({ duration: 75 })
   }
 
   function handleSubmit(event) {
     event.preventDefault();
     const textarea = $('.new-tweet__input ');
-    if (!textarea.val()) {
+    if (!textarea.val().trim()) {
+      console.log('empty');
       validationError('please tweet something!');
       return;
     }
     if (textarea.val().length > config.MAX_CHARS) {
       validationError('tweet too long! less is more!');
+      console.log('too long');
       return;
     }
-    $('.new-tweet__error').removeClass('active');
     $.post({
       url: '/tweets',
       data: $(this).serialize(),
-      success: function(data) { loadTweets() },
+      success: function(data) { loadTweets($('.tweet-container')) },
     });
     textarea.val('');
-    loadTweets();
   }
 
 
@@ -82,11 +83,11 @@ $(function() {
     $('.new-tweet__input').focus();
   }
 
-  function populatePage (data) {
+  function populatePage (data, tweetContainer) {
     const reversed = data.reverse()
-    const tweetContainer = $('.tweet-container');
-    tweetContainer.empty();
     addTweetsFactory(tweetContainer)(reversed);
+    tweetContainer.text('');
+    $('.tweet').removeClass('hidden');
   }
 
   function attachHandlers() {
@@ -94,16 +95,23 @@ $(function() {
     $('.nav-bar__button').on('click', handleComposeClick)
   }
 
-  function loadTweets(){
+
+  function loadTweets(tweetContainer){
+    const tweets = $('.tweet');
+    tweets.addClass('hidden');
+    if (!tweetContainer) {
+      debugger;
+    }
+    tweetContainer.text('loading...')
     $.get({
       url: '/tweets',
-      success: data => { populatePage(data); },
+      success: data => { populatePage(data, tweetContainer); },
       error: (err) => alert(`tweets not loading!, ${err}`),
       });
   }
 
   attachHandlers();
 
-  loadTweets();
+  loadTweets($('.tweet-container'));
 
 });
