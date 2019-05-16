@@ -4,9 +4,6 @@
  * Reminder: Use (and do all your DOM work in) jQuery's document ready function
  */
 
- // global data container to be populated later
- let tweetData;
-
 $(function() {
 
   function populateTweet(tweet, tweetInfo){
@@ -99,9 +96,6 @@ $(function() {
   function loadTweets(tweetContainer){
     const tweets = $('.tweet');
     tweets.addClass('hidden');
-    if (!tweetContainer) {
-      debugger;
-    }
     tweetContainer.text('loading...')
     $.get({
       url: '/tweets',
