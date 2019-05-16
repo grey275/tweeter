@@ -83,7 +83,7 @@ $(function() {
   function populatePage (data, tweetContainer) {
     const reversed = data.reverse()
     addTweetsFactory(tweetContainer)(reversed);
-    tweetContainer.text('');
+    tweetContainer.hideLoading();
     $('.tweet').removeClass('hidden');
   }
 
@@ -96,7 +96,7 @@ $(function() {
   function loadTweets(tweetContainer){
     const tweets = $('.tweet');
     tweets.addClass('hidden');
-    tweetContainer.text('loading...')
+    tweetContainer.showLoading()
     console.log('loading: ')
     $.get({
       url: '/tweets',
