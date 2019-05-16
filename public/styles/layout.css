@@ -31,7 +31,8 @@ main {
   width: 450px;
   height: 100%;
   margin: auto;
-  top: 140px;
+  margin-bottom: 1em;
+  top: 90px;
   background-color: white;
 }
 

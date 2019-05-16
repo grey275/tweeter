@@ -30,9 +30,10 @@
 
 .nav-bar__button {
   color: black;
-  margin-top: 14px;
-  height: 3em;
+  margin-top: 8px;
+  height: 4em;
   border: 1px solid black;
+  border-radius: 5px;
   background-color: white;
 }
 
