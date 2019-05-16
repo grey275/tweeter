@@ -51,11 +51,11 @@ $(function() {
     const textarea = $('.new-tweet__input ');
     if (!textarea.val().trim()) {
       console.log('empty');
-      validationError('please tweet something!');
+      validationError('Please tweet something!');
       return;
     }
     if (textarea.val().length > config.MAX_CHARS) {
-      validationError('tweet too long! less is more!');
+      validationError('Tweet too long! less is more!');
       console.log('too long');
       return;
     }
@@ -65,6 +65,7 @@ $(function() {
       success: function(data) { loadTweets($('.tweet-container')) },
     });
     textarea.val('');
+    $('.new-tweet__counter').text('140');
   }
 
 
