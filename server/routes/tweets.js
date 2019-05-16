@@ -8,11 +8,11 @@ const tweetsRoutes  = express.Router();
 module.exports = function(DataHelpers) {
 
   tweetsRoutes.get("/", function(req, res) {
-    DataHelpers.getTweets((err, tweets) => {
+    DataHelpers.getTweets(async (err, tweets) => {
       if (err) {
         res.status(500).json({ error: err.message });
       } else {
-        res.json(tweets);
+        res.json(await tweets);
       }
     });
   });
