@@ -5,6 +5,13 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "type": "node",
+      "runtimeExecutable": "${workspaceFolder}/node.sh",
+      "request": "launch",
+      "name": "server",
+      "program": "${workspaceFolder}/server/lib/load-mongo.js"
+    },
+    {
       "type": "chrome",
       "request": "launch",
       "runtimeExecutable": "/usr/bin/chromium-browser",

@@ -97,9 +97,10 @@ $(function() {
     const tweets = $('.tweet');
     tweets.addClass('hidden');
     tweetContainer.text('loading...')
+    console.log('loading: ')
     $.get({
       url: '/tweets',
-      success: data => { populatePage(data, tweetContainer); },
+      success: data => { console.log('loaded'); populatePage(data, tweetContainer); },
       error: (err) => alert(`tweets not loading!, ${err}`),
       });
   }
