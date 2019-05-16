@@ -89,7 +89,7 @@ $(function() {
   }
 
   function attachHandlers() {
-    $('#new-tweet__form').on('submit', handleSubmit);
+    $('.new-tweet__form').on('submit', handleSubmit);
     $('.nav-bar__button').on('click', handleComposeClick)
   }
 

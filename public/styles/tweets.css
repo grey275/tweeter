@@ -23,11 +23,9 @@
 }
 
 .tweet {
-  /* display: block; */
   margin-top: .5em;
   border-radius: 5px;
   border: 1px solid rgb(206, 202, 202, .80);
-  /* opacity: 0.5; */
 }
 
 .tweet.hidden {
