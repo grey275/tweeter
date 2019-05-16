@@ -56,6 +56,7 @@
   padding-top: 15px;
   margin: .25em;
   height: 4em;
+  word-wrap: break-word;
 }
 
 .tweet__created-at {
