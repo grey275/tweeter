@@ -19,11 +19,19 @@ module.exports = function makeDataHelpers(db) {
       });
     },
 
-    likeTweet: async(tweet) => {
+    likeTweet: async(_id) => {
       try {
         await db
           .collection('tweets')
-          .find(tweet)
+          .update(
+            { '_id': _id},
+            { $inc: { likes: '1' }},
+          );
+        console.log('liked tweet from id', _id);
+        const tweet = await db
+          .collection('tweets')
+          .find({ '_id': _id });
+        console.log(`liked ${tweet.user.name}'s tweet`)
       } catch(err) {
         console.log('ERROR: ', err);
       }

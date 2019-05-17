@@ -6,6 +6,8 @@
 
 $(function() {
 
+  let tweetData = [];
+
   function populateTweet(tweet, tweetInfo){
     const { user, content } = tweetInfo
 
@@ -28,6 +30,16 @@ $(function() {
       populateTweet(tweet, tweetInfo);
       tweet.appendTo(parent);
     });
+  }
+
+  function likeTweet(tweet_id) {
+    $.post({
+      url: '/tweets/data',
+      data: JSON.stringify( { _id: tweet_id }),
+      success: function(data) {
+        // like tweet
+      }
+    })
   }
 
   function addTweetsFactory(elm) {
@@ -58,12 +70,15 @@ $(function() {
       return;
     }
     $.post({
-      url: '/tweets',
+      url: '/tweets/new',
       data: $(this).serialize(),
       success: function(data) { loadTweets($('.tweet-container')) },
     });
     textarea.val('');
     $('.new-tweet__counter').text('140');
+  }
+
+  function handleLike(event) {
   }
 
 
@@ -100,7 +115,11 @@ $(function() {
     tweets.remove();
     $.get({
       url: '/tweets',
-      success: data => { console.log('loaded'); populatePage(data, tweetContainer); },
+      success: data => {
+        console.log('loaded');
+        tweetData = data;
+        populatePage(data, tweetContainer);
+      },
       error: (err) => alert(`tweets not loading!, ${err}`),
       });
   }

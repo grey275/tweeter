@@ -19,8 +19,17 @@ module.exports = function(DataHelpers) {
     });
   });
 
-  tweetsRoutes.post("/", async (req, res) => {
-    console.log('posted!')
+  tweetsRoutes.post("/like", async (req, res) => {
+    console.log('liked!')
+    if (!req.body._id) {
+      res.status(400).json({ error: 'invalid request: no data in POST body'});
+      return;
+    }
+    DataHelpers.saveTweet(req.body._id)
+  });
+
+  tweetsRoutes.post("/new", async (req, res) => {
+    console.log('new route!')
     if (!req.body.text) {
       res.status(400).json({ error: 'invalid request: no data in POST body'});
       return;
