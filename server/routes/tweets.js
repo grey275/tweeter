@@ -14,7 +14,7 @@ module.exports = function(DataHelpers) {
         res.status(500).json({ error: err.message });
       } else {
         res.json(await tweets);
-        console.log('tweets!', tweets)
+        console.log('got the tweets')
       }
     });
   });
@@ -41,6 +41,7 @@ module.exports = function(DataHelpers) {
         res.status(500).json({ error: err.message });
       } else {
         res.status(201).send();
+        console.log('tweet saved')
       }
     });
   });

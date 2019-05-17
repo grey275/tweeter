@@ -6,10 +6,10 @@
   "configurations": [
     {
       "type": "node",
-      "runtimeExecutable": "${workspaceFolder}/node.sh",
       "request": "launch",
+      "runtimeVersion": "8.9.4",
       "name": "server",
-      "program": "${workspaceFolder}/server/lib/load-mongo.js"
+      "program": "${workspaceFolder}/server/index.js"
     },
     {
       "type": "chrome",

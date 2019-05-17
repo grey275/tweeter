@@ -11,6 +11,7 @@ app.use(express.static("public"));
 
 (async () => {
   const db = await require("./lib/load-mongo");
+  const DataHelpers = require('./lib/data-helpers')(db);
   const tweetsRoutes = require("./routes/tweets")(DataHelpers);
 
   app.use("/tweets", tweetsRoutes);

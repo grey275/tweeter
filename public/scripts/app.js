@@ -89,6 +89,7 @@ $(function() {
   function attachHandlers() {
     $('.new-tweet__form').on('submit', handleSubmit);
     $('.nav-bar__button').on('click', handleComposeClick)
+    $('.tweet__button.retweet').on('click', )
   }
 
 
@@ -96,6 +97,7 @@ $(function() {
     const tweets = $('.tweet');
     tweets.addClass('hidden');
     tweetContainer.showLoading()
+    tweets.remove();
     $.get({
       url: '/tweets',
       success: data => { console.log('loaded'); populatePage(data, tweetContainer); },
