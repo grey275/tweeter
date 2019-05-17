@@ -11,6 +11,8 @@ $(function() {
   function populateTweet(tweet, tweetInfo){
     const { user, content } = tweetInfo
 
+
+
     // adding to header
     tweet.find('.tweet__avatar').attr('src', user.avatars.small);
     tweet.find('.tweet__name').text(user.name);

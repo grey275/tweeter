@@ -1,7 +1,8 @@
 .new-tweet {
   display: none;
-  padding: 1em;
+  padding: .2em;
   background-color: #eee;
+  /* border-radius: solid 1px black; */
 }
 
 .new-tweet__header {

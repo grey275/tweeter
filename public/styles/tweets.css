@@ -1,11 +1,14 @@
 :root {
   --normal-alpha: .80;
   --hover-alpha: 1.00;
+  --border-radius: 5px
 }
 
 .tweet-container {
-  margin-top: 1em;
-  min-height: 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
 }
 
 .loading-indicator {
@@ -23,11 +26,16 @@
 }
 
 .tweet {
-  /* padding: .2em; */
-  /* margin-top: .5em; */
+  display: flex;
+  width: 100%;
   border-radius: 5px;
-  padding: .2em;
+  margin-top: .5em;
   border: 1px solid rgb(206, 202, 202, .80);
+  flex-direction: column
+}
+
+.tweet:first-child {
+  margin-top: 0;
 }
 
 .tweet.hidden {
@@ -37,12 +45,11 @@
 
 
 .tweet header {
-  /* background-color: #eee; */
   opacity: var(--normal-alpha);
   padding: .5em;
-  padding-top: 2;
   background-color: #eee;
   border-radius: 5px;
+  margin: .1em;
 }
 
 .tweet > header > span {
@@ -69,7 +76,7 @@
 }
 
 .tweet__text {
-  padding-top: 15px;
+  padding-top: 1em;
   margin: .25em;
   height: 4em;
   word-wrap: break-word;
