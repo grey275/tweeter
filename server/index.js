@@ -27,10 +27,9 @@ const DataHelpers = async () => require("./lib/data-helpers.js")(await db);
 const tweetsRoutes = async () => require("./routes/tweets")(await DataHelpers());
 
 // Mount the tweets routes at the "/tweets" path prefix:
-console.log('wtf');
 (async () => {
   await app.use("/tweets", await tweetsRoutes());
   app.listen(PORT, () => {
-    console.log("Example app listening on port " + PORT);
+    console.log("Tweeter listening on port " + PORT);
   });
 })();

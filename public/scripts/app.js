@@ -12,7 +12,7 @@ $(function() {
     // adding to header
     tweet.find('.tweet__avatar').attr('src', user.avatars.small);
     tweet.find('.tweet__name').text(user.name);
-    tweet.find('.handle').text(user.handle);
+    tweet.find('.tweet__handle').text(user.handle);
 
     // adding to footer
     tweet.find('.tweet__text').text(content.text);
@@ -50,13 +50,11 @@ $(function() {
     event.preventDefault();
     const textarea = $('.new-tweet__input ');
     if (!textarea.val().trim()) {
-      console.log('empty');
       validationError('Please tweet something!');
       return;
     }
     if (textarea.val().length > config.MAX_CHARS) {
       validationError('Tweet too long! less is more!');
-      console.log('too long');
       return;
     }
     $.post({
@@ -98,7 +96,6 @@ $(function() {
     const tweets = $('.tweet');
     tweets.addClass('hidden');
     tweetContainer.showLoading()
-    console.log('loading: ')
     $.get({
       url: '/tweets',
       success: data => { console.log('loaded'); populatePage(data, tweetContainer); },
