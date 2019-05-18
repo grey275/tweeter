@@ -16,7 +16,8 @@
     "express": "^4.13.4",
     "md5": "^2.1.0",
     "moment": "^2.24.0",
-    "mongodb": "^2.2.36"
+    "mongodb": "^2.2.36",
+    "serve-favicon": "^2.5.0"
   },
   "devDependencies": {
     "nodemon": "^1.9.2"

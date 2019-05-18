@@ -6,7 +6,7 @@
 $(function() {
 
   function populateTweet(tweetMarkup, tweetInfo){
-    const { user, content, _id, likes } = tweetInfo
+    const { user, content, _id, likes, created_at } = tweetInfo
     tweetMarkup.attr('id', _id);
     // adding to header
     tweetMarkup.find('.tweet__avatar').attr('src', user.avatars.small);
@@ -15,7 +15,7 @@ $(function() {
 
     // adding to footer
     tweetMarkup.find('.tweet__text').text(content.text);
-    tweetMarkup.find('.tweet__created-at') .text(moment(content.created_at).fromNow());
+    tweetMarkup.find('.tweet__created-at') .text(moment(created_at).fromNow());
   }
 
 

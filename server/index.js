@@ -3,10 +3,14 @@
 // Basic express setup:
 const express       = require("express");
 const bodyParser    = require("body-parser");
+const favicon  = require('serve-favicon');
+const path = require('path');
 
 const { PORT } = require('./config');
 
 const app = express();
+
+app.use(favicon('public/images/bird.png'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
