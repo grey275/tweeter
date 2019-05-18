@@ -74,13 +74,17 @@ $(function() {
       validationError('Tweet too long! less is more!');
       return;
     }
+    console.log('hiding')
+    $('.new-tweet__error').hide()
     $.post({
       url: '/tweets/new',
       data: $(this).serialize(),
-      success: function(data) { loadTweets($('.tweet-container')) },
+      success: function(data) {
+        textarea.val('');
+        $('.new-tweet__counter').text(config.MAX_CHARS);
+        loadTweets($('.tweet-container'))
+      },
     });
-    textarea.val('');
-    $('.new-tweet__counter').text(config.MAX_CHARS);
   }
 
   function handleComposeClick(event) {

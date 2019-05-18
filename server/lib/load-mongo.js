@@ -1,5 +1,5 @@
 const { MongoClient } = require("mongodb");
-const { MONGODB_URI } = require('./config');
+const { MONGODB_URI } = require('../config');
 
 const loadDB = (uri, client) => {
   try {

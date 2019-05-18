@@ -1,9 +1,10 @@
 "use strict";
 
 // Basic express setup:
-const { PORT } = config.PORT
 const express       = require("express");
 const bodyParser    = require("body-parser");
+
+const { PORT } = require('./config');
 
 const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));

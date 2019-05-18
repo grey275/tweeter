@@ -39,6 +39,7 @@ main {
   top: 90px;
   background-color: white;
   border-radius: var(--border-radius);
+  max-width: 600px;
 }
 
 main > * {
