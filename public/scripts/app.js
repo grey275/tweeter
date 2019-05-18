@@ -127,12 +127,12 @@ $(function() {
       success: data => {
         tweetData = data;
         populatePage(data, tweetContainer);
-        attachHandlers();
       },
       error: (err) => alert(`tweets not loading!, ${err}`),
       });
   }
 
   loadTweets($('.tweet-container'));
+  attachHandlers();
 
 });
