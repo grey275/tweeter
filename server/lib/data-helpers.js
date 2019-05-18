@@ -1,4 +1,5 @@
 "use strict";
+const { ObjectId } = require('mongodb');
 
 // Simulates the kind of delay we see with network or filesystem operations
 const simulateDelay = require("./util/simulate-delay");
@@ -19,21 +20,22 @@ module.exports = function makeDataHelpers(db) {
       });
     },
 
-    likeTweet: async(_id) => {
+    likeTweet: async _id => {
       try {
         await db
           .collection('tweets')
-          .update(
-            { '_id': _id},
-            { $inc: { likes: '1' }},
-          );
-        console.log('liked tweet from id', _id);
+          .update({ '_id': ObjectId(_id )},
+                  { $inc: { likes: 1 } });
+
         const tweet = await db
           .collection('tweets')
-          .find({ '_id': _id });
-        console.log(`liked ${tweet.user.name}'s tweet`)
+          .findOne({ _id: ObjectId(_id) })
+
+
+
+        return [null, tweet.likes];
       } catch(err) {
-        console.log('ERROR: ', err);
+        return [err];
       }
     },
 
@@ -46,7 +48,6 @@ module.exports = function makeDataHelpers(db) {
           .find()
           .toArray();
 
-          console.log(`get ${getNum}`, tweets.length)
         callback(null, tweets.sort(sortNewestFirst));
       });
     }

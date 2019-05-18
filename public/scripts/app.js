@@ -1,28 +1,21 @@
-/*
- * Client-side JS logic goes here
+/* * Client-side JS logic goes here
  * jQuery is already loaded
  * Reminder: Use (and do all your DOM work in) jQuery's document ready function
  */
 
 $(function() {
 
-  let tweetData = [];
-
-  function populateTweet(tweet, tweetInfo){
-    const { user, content } = tweetInfo
-
-
-
+  function populateTweet(tweetMarkup, tweetInfo){
+    const { user, content, _id, likes } = tweetInfo
+    tweetMarkup.attr('id', _id);
     // adding to header
-    tweet.find('.tweet__avatar').attr('src', user.avatars.small);
-    tweet.find('.tweet__name').text(user.name);
-    tweet.find('.tweet__handle').text(user.handle);
+    tweetMarkup.find('.tweet__avatar').attr('src', user.avatars.small);
+    tweetMarkup.find('.tweet__name').text(user.name);
+    tweetMarkup.find('.tweet__handle').text(user.handle);
 
     // adding to footer
-    tweet.find('.tweet__text').text(content.text);
-    tweet.find('.tweet__created-at')
-      .text(moment(content.created_at).fromNow()
-    );
+    tweetMarkup.find('.tweet__text').text(content.text);
+    tweetMarkup.find('.tweet__created-at') .text(moment(content.created_at).fromNow());
   }
 
 
@@ -34,21 +27,29 @@ $(function() {
     });
   }
 
+  // unfortunately I couldn't get this to work sooner enough, so this is dead code for now
   function likeTweet(tweet_id) {
     $.post({
-      url: '/tweets/data',
-      data: JSON.stringify( { _id: tweet_id }),
-      success: function(data) {
-        // like tweet
+      url: '/tweets/like',
+      data: {_id: "5cded97f9aa945112dafb8f9"},
+      success: (data) => {
+        const tweet = $('#' + tweet_id);
+        tweet.addClass('liked');
+        $(tweet).children('')
       }
-    })
+    });
   }
 
-  function addTweetsFactory(elm) {
-    const addTweets = (tweetsInfo) => {
-      for (let tweetInfo of tweetsInfo) {
-        addTweet(elm, tweetInfo)
-      }
+  // dead code, see above
+  function handleLike(event) {
+    $(this).preventDefault();
+    likeTweet(this.attr('id'));
+  }
+
+  // simple closure to pass in the container
+  const addTweets = (container, tweetsInfo) => {
+    for (let tweetInfo of tweetsInfo) {
+      addTweet(container, tweetInfo)
     }
     return addTweets;
   }
@@ -63,6 +64,8 @@ $(function() {
   function handleSubmit(event) {
     event.preventDefault();
     const textarea = $('.new-tweet__input ');
+
+    // trim to prevent whitespace only tweets
     if (!textarea.val().trim()) {
       validationError('Please tweet something!');
       return;
@@ -77,12 +80,8 @@ $(function() {
       success: function(data) { loadTweets($('.tweet-container')) },
     });
     textarea.val('');
-    $('.new-tweet__counter').text('140');
+    $('.new-tweet__counter').text(config.MAX_CHARS);
   }
-
-  function handleLike(event) {
-  }
-
 
   function handleComposeClick(event) {
     const button = $('.nav-bar__button');
@@ -98,7 +97,8 @@ $(function() {
 
   function populatePage (data, tweetContainer) {
     const reversed = data.reverse()
-    addTweetsFactory(tweetContainer)(reversed);
+
+    addTweets(tweetContainer, reversed);
     tweetContainer.hideLoading();
     $('.tweet').removeClass('hidden');
   }
@@ -106,27 +106,28 @@ $(function() {
   function attachHandlers() {
     $('.new-tweet__form').on('submit', handleSubmit);
     $('.nav-bar__button').on('click', handleComposeClick)
-    $('.tweet__button.retweet').on('click', )
   }
 
 
   function loadTweets(tweetContainer){
     const tweets = $('.tweet');
+
+    // selector assigning display: none
     tweets.addClass('hidden');
+
+    // shows the loading spinner
     tweetContainer.showLoading()
     tweets.remove();
     $.get({
       url: '/tweets',
       success: data => {
-        console.log('loaded');
         tweetData = data;
         populatePage(data, tweetContainer);
+        attachHandlers();
       },
       error: (err) => alert(`tweets not loading!, ${err}`),
       });
   }
-
-  attachHandlers();
 
   loadTweets($('.tweet-container'));
 

@@ -8,28 +8,29 @@ const tweetsRoutes  = express.Router();
 module.exports = function(DataHelpers) {
 
   tweetsRoutes.get("/", function(req, res) {
-    console.log('get got')
     DataHelpers.getTweets(async (err, tweets) => {
       if (err) {
         res.status(500).json({ error: err.message });
       } else {
         res.json(await tweets);
-        console.log('got the tweets')
       }
     });
   });
 
+  // this route technically works, but does nothing on the client side.
+  // It increments the counter for the tweet ID you passed through to the body.
   tweetsRoutes.post("/like", async (req, res) => {
-    console.log('liked!')
-    if (!req.body._id) {
+    const { _id } = req.body;
+    if (!id) {
       res.status(400).json({ error: 'invalid request: no data in POST body'});
       return;
     }
-    DataHelpers.saveTweet(req.body._id)
+
+    const [err, numOfLikes] = await DataHelpers.likeTweet(_id);
   });
 
+  // posts new tweets to the database
   tweetsRoutes.post("/new", async (req, res) => {
-    console.log('new route!')
     if (!req.body.text) {
       res.status(400).json({ error: 'invalid request: no data in POST body'});
       return;
@@ -50,7 +51,6 @@ module.exports = function(DataHelpers) {
         res.status(500).json({ error: err.message });
       } else {
         res.status(201).send();
-        console.log('tweet saved')
       }
     });
   });
