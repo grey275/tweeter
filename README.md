@@ -22,4 +22,4 @@ If all is well you should be viewing the app!
 
 
 ## Screenshots
-['1'](https://github.com/grey275/tweeter/blob/master/screenshot_feed.png), ['2'](https://github.com/grey275/tweeter/blob/master/screenshot_hover.png)
+["1"](https://github.com/grey275/tweeter/blob/master/screenshot_feed.png), ["2"](https://github.com/grey275/tweeter/blob/master/screenshot_hover.png)
