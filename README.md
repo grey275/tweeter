@@ -19,3 +19,7 @@ Welcome to my simple twitter clone!
 ## 3. View
 Open up your browser and navigate to `localhost:8080`.
 If all is well you should be viewing the app!
+
+
+## Screenshots
+[1](https://github.com/grey275/tweeter/blob/master/screenshot_feed.png), [2](https://github.com/grey275/tweeter/blob/master/screenshot_hover.png)
